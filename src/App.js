@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import axios from 'axios';
 
-function App() {
+import './App.css';
+import List from './components/List';
+import Welcome from './components/Welcome';
+import Modal from './components/Modal';
+import withListLoading from './components/withListLoading';
+
+export default function App() {
+
+  const ListLoading = withListLoading(List);
+  const [appState, setAppState] = useState({
+    loading: false,
+    repos: null,
+  });
+
+  useEffect(() => {
+    setAppState({ loading: true });
+    const apiUrl = `https://api.covid19api.com/summary`;
+    axios.get(apiUrl).then((repos) => {
+      const allRepos = repos.data.Countries;
+      setAppState({ loading: false, repos: allRepos });
+    });
+  }, [setAppState]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/list">
+          <ListLoading isLoading={appState.loading} repos={appState.repos} />
+        </Route>
+        <Route path="/modal">
+          {/* under constr */}
+        </Route>
+        <Route path="/">
+        <Welcome />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
-
-export default App;

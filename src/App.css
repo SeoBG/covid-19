@@ -7,6 +7,66 @@
   pointer-events: none;
 }
 
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0000003a;
+  transition: opacity 0.2s ease;
+}
+
+.modal {
+  position: fixed;
+    z-index: 500;
+    background-color: white;
+    width: 70%;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+    padding: 16px;
+    left: 15%;
+    top: 30%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+}
+@media (min-width: 600px) {
+  .modal {
+      width: 500px;
+      left: calc(50% - 250px);
+  }
+}
+.modalBackground{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,0.5);
+}
+.modal button {
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
+  margin: 0 auto;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px #0000003a;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.562);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -23,11 +83,32 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.aside{
+  background-color: white;
+  padding: 20px;
+}
+.smallRows{
+  display: inline-block;
+  padding: 6px;
+  margin: 4px;
+  border: 1px solid #61dafb;
+}
 .App-link {
   color: #61dafb;
+  text-align: center;
+  text-decoration: none;
 }
-
+.content{
+  padding: 20px;
+}
+.country-link{
+  font-size: 16px;
+}
+.list-head{
+  color:white;
+  text-align: center;
+  margin-top:0px;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
